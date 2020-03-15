@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>Assignment 2</title>
+</head>
+	<body>
+		<style media="screen">
+			.container {
+				width: 300px;
+				display: flex;
+			}
+
+			.row {
+				width:50%;
+			}
+
+			ul {
+				list-style-type: none;
+				padding-left: 0;
+			}
+		</style>
+
+		<script type="text/javascript">
+			//grocery items list
+			var groceryItem1 = "Bread";
+			var groceryItem2 = "Potatoes";
+			var groceryItem3 = "Coffee";
+			var groceryItem4 = "Toilet Paper";
+			var groceryItem5 = "Vitamins";
+			var groceryItem6 = "Coupon";
+			var groceryItem7 = "Chips";
+			var groceryItem8 = "Peas";
+			var groceryItem9 = "Coconut Milk";
+			var groceryItem10 = "Carrots";
+			var groceryItem11 = "Tuna";
+
+			//grocery price list
+			var groceryItemPrice1 = 3.99;
+			var groceryItemPrice2 = 5.99;
+			var groceryItemPrice3 = 8.99;
+			var groceryItemPrice4 = 3.99;
+			var groceryItemPrice5 = 15.49;
+			var groceryItemPrice6 = -0.50;
+			var groceryItemPrice7 = 1.59;
+			var groceryItemPrice8 = 2.99;
+			var groceryItemPrice9 = 2.49;
+			var groceryItemPrice10 = 3.49;
+			var groceryItemPrice11 = 2.19;
+
+			//Coupon
+			var coupon = groceryItemPrice6.toFixed(2);
+
+			//Subtotal
+			var subTotalCalculation = groceryItemPrice1 + groceryItemPrice2 + groceryItemPrice3 + groceryItemPrice4 + groceryItemPrice5 + groceryItemPrice6 + groceryItemPrice7 + groceryItemPrice8 + groceryItemPrice9 + groceryItemPrice10 + groceryItemPrice11;
+
+			var subTotal = subTotalCalculation.toFixed(2);
+
+			//tax calculations
+			var taxAmountCalculation = subTotal *.13;
+			var taxAmount = taxAmountCalculation.toFixed(2);
+
+			//calculating totals
+			var groceryTotalCalculation = parseFloat(subTotal) + parseFloat(taxAmount);
+			var groceryTotal = groceryTotalCalculation.toFixed(2);
+
+			//creating the div.container
+			document.write(`<div class="container">`);
+
+			//list of grocery items
+			document.write(`
+				<div class="row">
+					<ul>
+						<li>${groceryItem1}</li>
+						<li>${groceryItem2}</li>
+						<li>${groceryItem3}</li>
+						<li>${groceryItem4}</li>
+						<li>${groceryItem5}</li>
+						<li>${groceryItem6}</li>
+						<li>${groceryItem7}</li>
+						<li>${groceryItem8}</li>
+						<li>${groceryItem9}</li>
+						<li>${groceryItem10}</li>
+						<li>${groceryItem11}</li>
+					</ul>
+					<hr>
+				</div>`);
+
+			//list of prices
+			document.write(`
+				<div class="row">
+					<ul>
+						<li>$${groceryItemPrice1}</li>
+						<li>$${groceryItemPrice2}</li>
+						<li>$${groceryItemPrice3}</li>
+						<li>$${groceryItemPrice4}</li>
+						<li>$${groceryItemPrice5}</li>
+						<li>$${coupon}</li>
+						<li>$${groceryItemPrice7}</li>
+						<li>$${groceryItemPrice8}</li>
+						<li>$${groceryItemPrice9}</li>
+						<li>$${groceryItemPrice10}</li>
+						<li>$${groceryItemPrice11}</li>
+					</ul>
+					<hr>
+				</div>`);
+
+			//closing the div.container
+			document.write(`</div>`);
+
+			//opening the div.container
+			document.write(`<div class="container">`);
+
+			
+
+			//try nesting code here
+			var confirmTotal = confirm(`Your total is ${groceryTotal}. Are you paying with cash?`);
+			//paying with cash = cornfirm true
+			if (confirmTotal == true) {
+				var paymentAmountCalculation = prompt(`Your total is ${groceryTotal}. How much cash are you giving me?`);
+				//turn promt variable into integer and add toFixed to get decimals
+				var paymentAmountNoDecimals = parseFloat(paymentAmountCalculation);
+				var paymentAmount = paymentAmountNoDecimals.toFixed(2);
+
+				var changeCalculation = parseFloat(paymentAmount) - groceryTotal;
+				var change = changeCalculation.toFixed(2);
+
+				//the receipt text
+				document.write(`
+					<div class="row">
+						<ul>
+							<li>Subtotal</li>
+							<li>Tax @ 13%</li>
+							<li>Total</li>
+							<li>Payment</li>
+							<li id="change-display">Change</li>
+						</ul>
+					</div>`);
+
+				//the receipt numbers
+				document.write(`
+					<div class="row">
+						<ul>
+							<li>$${subTotal}</li>
+							<li>$${taxAmount}</li>
+							<li>$${groceryTotal}</li>
+							<li>$${paymentAmount}</li>
+							<li>$${change}</li>
+						</ul>
+					</div>`);
+
+			} else { 
+			//using credit card, correct pin
+				var userEnterPin = prompt(`Enter your pin`);
+				if (userEnterPin == 9999){
+				//credit tendered
+				document.write(`
+					<div class="row">
+						<ul>
+							<li>Subtotal</li>
+							<li>Tax @ 13%</li>
+							<li>Total</li>
+						</ul>
+					</div>`);
+
+				document.write(`
+					<div class="row">
+						<ul>
+							<li>$${subTotal}</li>
+							<li>$${taxAmount}</li>
+							<li>$${groceryTotal}</li>
+							<li>Credit Tendered</li>
+						</ul>
+					</div>`);
+				
+			} else {
+			//using credit card, wrong pin
+				groceryTotal = (0).toFixed(2);
+					document.write(`
+					<div class="row">
+						<ul>
+							<li>Subtotal</li>
+							<li>Tax @ 13%</li>
+							<li>Total</li>
+						</ul>
+					</div>`);
+
+				document.write(`
+					<div class="row">
+						<ul>
+							<li>$${subTotal}</li>
+							<li>$${taxAmount}</li>
+							<li>$${groceryTotal}</li>
+							<li>Credit Card Declined - Transaction Cancelled</li>
+						</ul>
+					</div>`);
+					}
+				}
+
+			//closing div.container
+			document.write(`</div>`);
+
+
+		</script>
+	</body>
+</html>
